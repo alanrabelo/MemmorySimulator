@@ -15,6 +15,7 @@
 		E710CBDC1D8B230A00F8F735 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E710CBDA1D8B230A00F8F735 /* LaunchScreen.storyboard */; };
 		E710CBE71D8B230B00F8F735 /* MemorySimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E710CBE61D8B230B00F8F735 /* MemorySimulatorTests.swift */; };
 		E710CBF21D8B230B00F8F735 /* MemorySimulatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E710CBF11D8B230B00F8F735 /* MemorySimulatorUITests.swift */; };
+		E710CC001D8B2E0C00F8F735 /* ChangeOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E710CBFF1D8B2E0C00F8F735 /* ChangeOptionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		E710CBED1D8B230B00F8F735 /* MemorySimulatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemorySimulatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E710CBF11D8B230B00F8F735 /* MemorySimulatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySimulatorUITests.swift; sourceTree = "<group>"; };
 		E710CBF31D8B230B00F8F735 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E710CBFF1D8B2E0C00F8F735 /* ChangeOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeOptionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				E710CBCE1D8B230A00F8F735 /* AppDelegate.swift */,
 				E710CBD01D8B230A00F8F735 /* ViewController.swift */,
 				E710CBD21D8B230A00F8F735 /* Main.storyboard */,
+				E710CBFF1D8B2E0C00F8F735 /* ChangeOptionsViewController.swift */,
 				E710CBD81D8B230A00F8F735 /* Assets.xcassets */,
 				E710CBDA1D8B230A00F8F735 /* LaunchScreen.storyboard */,
 				E710CBDD1D8B230A00F8F735 /* Info.plist */,
@@ -268,6 +271,7 @@
 				E710CBD11D8B230A00F8F735 /* ViewController.swift in Sources */,
 				E710CBD71D8B230A00F8F735 /* MemorySimulator.xcdatamodeld in Sources */,
 				E710CBCF1D8B230A00F8F735 /* AppDelegate.swift in Sources */,
+				E710CC001D8B2E0C00F8F735 /* ChangeOptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
