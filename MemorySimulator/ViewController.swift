@@ -15,7 +15,7 @@ enum strategyForMemoryManagement {
     case nextFit
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var labelsText = ["Quantidade de Processos","Estratégia","Tamanho da Memória", "Espaço S.O.","Intervalo Tamanho de Memória","Intervalo Tempo","Intervalo Duração"]
@@ -35,63 +35,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let headNode = MemoryNode(totalSize: 50, isFreeSpace: true)
+        let nextNode = MemoryNode(totalSize: 15, isFreeSpace: false)
+        let otherNode = MemoryNode(totalSize: 25, isFreeSpace: false)
+        let otherNode2 = MemoryNode(totalSize: 35, isFreeSpace: false)
+
+        
+        let memory = MemoryList(withHead: headNode)
+        memory.firstFistInsert(node: nextNode)
+        memory.firstFistInsert(node: otherNode)
+        memory.firstFistInsert(node: otherNode2)
+        memory.firstFistRemove(processID: 1)
+        memory.printListSizes()
+        
     }
 
-    func getLabelForCell(atIndexPath indexpath : IndexPath) -> String {
         
-        switch indexpath.row {
-        case 0:
-            return String(numberOfProcesses)
-        case 1:
-            return String(describing: strategy)
-        case 2:
-            return String("\(sizeOfMemory) MB")
-        case 3:
-            return String("\(spaceForOS) MB")
-        case 4:
-            return String("\(intervalOfProcessSizeInMemory) MB")
-        case 5:
-            return String("\(intervalOfTimeOfInstantiationOfAProcess) MB")
-        case 6:
-            return String("\(intervalOfDurationOfAProcess) MB")
-        default:
-            return "OI"
-        }
-        
-    }
-    
     //MARK: TableView
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        
-        
-        cell.textLabel?.textColor = UIColor.white
-        cell.detailTextLabel?.textColor = UIColor.lightGray
-        cell.backgroundView = nil
-        cell.backgroundColor = UIColor.clear
-        cell.textLabel?.text = labelsText[indexPath.row]
-        cell.detailTextLabel?.text = getLabelForCell(atIndexPath: indexPath)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        lastSelectedIndexpath = indexPath
-        performSegue(withIdentifier: "changeOptions", sender: self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let changeOptionsViewController = segue.destination as! ChangeOptionsViewController
-        changeOptionsViewController.previousViewSelectedRow = lastSelectedIndexpath.row
         
     }
 
