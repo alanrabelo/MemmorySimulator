@@ -26,6 +26,8 @@ class MemoryList: NSObject {
         
         var actualNodeInLoop = self.head
         
+        var previousFromActual : MemoryNode?
+        
         //ATUALIZA O CONTADOR DE PROCESSOS DA MEMÓRIA, PARA ATRIBUIR UM VALOR ÚNICO A CADA PROCESSO CASO NÃO SEJA UM ESPAÇO LIVRE
         if !node.isFreeSpace {
             node.processID = countOfProcesses
@@ -36,21 +38,31 @@ class MemoryList: NSObject {
             
             //Verifica se o nó selecionado é um espaço livre e se tem espaço para receber o nó
             if actualNodeInLoop.isFreeSpace == true && actualNodeInLoop.totalSize >= node.totalSize {
-                node.nextNode = self.head
+                
+                if previousFromActual != nil {
+                    previousFromActual!.nextNode = node
+                } else {
+                    self.head = node
+                }
+                
+                node.nextNode = actualNodeInLoop
                 actualNodeInLoop.totalSize -= node.totalSize
-                self.head = node
                 print("Adicionado com sucesso!")
-
                 break
+                
             } else {
                 //Verifica se o próximo não é nulo e repete o loop com o próximo nó
                 if let nextNode = actualNodeInLoop.nextNode {
+                    previousFromActual = actualNodeInLoop
                     actualNodeInLoop = nextNode
+                    
                 } else {
                     print("Faltou Espaço")
                     break
                 }
             }
+            
+            
         }
         
     }
@@ -58,42 +70,18 @@ class MemoryList: NSObject {
     func firstFistRemove(processID : Int) {
         
         var actualNodeInLoop = self.head
-        
+        var previousFromActual : MemoryNode?
+
         while true {
             
             if actualNodeInLoop.processID! == processID {
                 actualNodeInLoop.isFreeSpace = true
                 actualNodeInLoop.processID = 0
-                
-                var nextNodeFromActualNodeInLoop : MemoryNode
-                while true {
-                    if let nextNode = actualNodeInLoop.nextNode {
-                        nextNodeFromActualNodeInLoop = nextNode
-                        if nextNodeFromActualNodeInLoop.isFreeSpace {
-                            
-                            if let nextNodeFromNextNode = nextNodeFromActualNodeInLoop.nextNode {
-                                actualNodeInLoop.nextNode = nextNodeFromNextNode
-                                nextNodeFromActualNodeInLoop = nextNodeFromActualNodeInLoop.nextNode!
-                                break
-                            }  else {
-                                actualNodeInLoop.totalSize += nextNodeFromActualNodeInLoop.totalSize
-                                actualNodeInLoop.nextNode = nil
-                                break
-                            }
-                        }
-                        break
-                    } else {
-                        print("Faltou Espaço")
-                        break
-                    }
-                }
-                
                 break
             } else {
                 if let nextNode = actualNodeInLoop.nextNode {
                     actualNodeInLoop = nextNode
                 } else {
-                    print("Faltou Espaço")
                     break
                 }
 
@@ -103,8 +91,45 @@ class MemoryList: NSObject {
         
     }
     
+    func mergeFreeSpaces() {
+        
+        var actualNode = self.head
+        
+        while actualNode.nextNode != nil {
+            
+            while actualNode.nextNode!.isFreeSpace {
+                
+                if actualNode.isFreeSpace && actualNode.nextNode!.isFreeSpace {
+                    
+                    if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
+                        actualNode.nextNode = nextNodefromNextNode
+                        actualNode.totalSize += actualNode.nextNode!.totalSize
+                    } else {
+                        actualNode.totalSize += actualNode.nextNode!.totalSize
+                        actualNode.nextNode = nil
+                        return
+                    }
+                    
+                    
+                } else {
+                    break
+                }
+                
+            }
+            
+            if actualNode.nextNode != nil {
+                actualNode = actualNode.nextNode!
+            } else {
+                break
+            }
+
+        }
+        
+    }
+    
     func printListSizes() {
         var node = self.head
+        print("-------x-------x------")
         while true {
             
             if node.isFreeSpace {
@@ -120,6 +145,8 @@ class MemoryList: NSObject {
                 break
             }
         }
+        print("-------x-------x------")
+
     }
     
     

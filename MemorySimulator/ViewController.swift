@@ -36,19 +36,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let headNode = MemoryNode(totalSize: 50, isFreeSpace: true)
-        let nextNode = MemoryNode(totalSize: 15, isFreeSpace: false)
-        let otherNode = MemoryNode(totalSize: 25, isFreeSpace: false)
-        let otherNode2 = MemoryNode(totalSize: 35, isFreeSpace: false)
+        let headNode = MemoryNode(totalSize: 150, isFreeSpace: true)
+        let _15Node = MemoryNode(totalSize: 15, isFreeSpace: false)
+        let _25Node = MemoryNode(totalSize: 25, isFreeSpace: false)
+        let _35Node = MemoryNode(totalSize: 35, isFreeSpace: false)
+        let _35Node2 = MemoryNode(totalSize: 35, isFreeSpace: false)
+
 
         
         let memory = MemoryList(withHead: headNode)
-        memory.firstFistInsert(node: nextNode)
-        memory.firstFistInsert(node: otherNode)
-        memory.firstFistInsert(node: otherNode2)
+        memory.firstFistInsert(node: _15Node)
+        memory.firstFistInsert(node: _25Node)
+
         memory.firstFistRemove(processID: 1)
-        memory.printListSizes()
+
+        memory.firstFistInsert(node: _35Node)
+        memory.firstFistInsert(node: _35Node2)
+
+        memory.firstFistRemove(processID: 3)
+        memory.firstFistRemove(processID: 4)
         
+        memory.mergeFreeSpaces()
+        memory.printListSizes()
+
     }
 
         
