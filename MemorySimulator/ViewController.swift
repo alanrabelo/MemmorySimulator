@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     //VARIÁVEIS ACESSÓRIO
     var lastSelectedIndexpath : IndexPath!
     
+    var processes = [MemoryNode]()
+    
     // VARIÁVEIS PARA GERAR A ESTRUTURA DA MEMÓRIA
     var numberOfProcesses = 0
     var strategy = strategyForMemoryManagement.firstFit
@@ -50,17 +52,17 @@ class ViewController: UIViewController {
         let _25Node = MemoryNode(totalSize: 25, isFreeSpace: false)
         let _35Node = MemoryNode(totalSize: 35, isFreeSpace: false)
         let _35Node2 = MemoryNode(totalSize: 35, isFreeSpace: false)
-
-
+        
+        
         
         let memory = MemoryList(withHead: headNode)
-        memory.firstFistInsert(node: _15Node)
-        memory.firstFistInsert(node: _25Node)
+        memory.firstFitInsert(node: _15Node)
+        memory.firstFitInsert(node: _25Node)
 
         memory.firstFistRemove(processID: 1)
 
-        memory.firstFistInsert(node: _35Node)
-        memory.firstFistInsert(node: _35Node2)
+        memory.firstFitInsert(node: _35Node)
+        memory.firstFitInsert(node: _35Node2)
 
         memory.firstFistRemove(processID: 3)
         memory.firstFistRemove(processID: 4)
