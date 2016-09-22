@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     //VARIÁVEIS ACESSÓRIO
     var lastSelectedIndexpath : IndexPath!
     
+    var processes = [MemoryNode]()
+    
     // VARIÁVEIS PARA GERAR A ESTRUTURA DA MEMÓRIA
     var numberOfProcesses = 0
     var strategy = strategyForMemoryManagement.firstFit
