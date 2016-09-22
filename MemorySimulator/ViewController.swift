@@ -34,6 +34,9 @@ class ViewController: UIViewController {
     
     var processes = [MemoryNode]()
     
+    var memory : MemoryList?
+    
+    
     // VARIÁVEIS PARA GERAR A ESTRUTURA DA MEMÓRIA
     var numberOfProcesses = 0
     var strategy = strategyForMemoryManagement.firstFit
@@ -47,37 +50,59 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let headNode = MemoryNode(totalSize: 150, isFreeSpace: true)
-        let _15Node = MemoryNode(totalSize: 15, isFreeSpace: false)
-        let _25Node = MemoryNode(totalSize: 25, isFreeSpace: false)
-        let _35Node = MemoryNode(totalSize: 35, isFreeSpace: false)
-        let _35Node2 = MemoryNode(totalSize: 35, isFreeSpace: false)
+//        let headNode = MemoryNode(totalSize: 150, isFreeSpace: true)
+//        let _15Node = MemoryNode(totalSize: 15, isFreeSpace: false)
+//        let _25Node = MemoryNode(totalSize: 25, isFreeSpace: false)
+//        let _35Node = MemoryNode(totalSize: 35, isFreeSpace: false)
+//        let _35Node2 = MemoryNode(totalSize: 35, isFreeSpace: false)
         
-        let memory = MemoryList(withHead: headNode)
-        memory.firstFitInsert(node: _15Node)
-        memory.firstFitInsert(node: _25Node)
-
-        memory.firstFistRemove(processID: 1)
-
-        memory.firstFitInsert(node: _35Node)
-        memory.firstFitInsert(node: _35Node2)
-
-        memory.firstFistRemove(processID: 3)
-        memory.firstFistRemove(processID: 4)
+//        let memory = MemoryList(withHead: headNode)
+//        memory.firstFitInsert(node: _15Node)
+//        memory.firstFitInsert(node: _25Node)
+//
+//        memory.firstFistRemove(processID: 1)
+//
+//        memory.firstFitInsert(node: _35Node)
+//        memory.firstFitInsert(node: _35Node2)
+//
+//        memory.firstFistRemove(processID: 3)
+//        memory.firstFistRemove(processID: 4)
         
-        memory.mergeFreeSpaces()
-        memory.printListSizes()
+//        memory.mergeFreeSpaces()
+//        memory.printListSizes()
         
         let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(manageTime), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .defaultRunLoopMode)
         
         print(generateRandomValues(withRange: 10..<31, withQuantity: 100).sorted())
         
+        
+        
+        
     }
     
-//    func configureProcessesData(withNumberOfProceses numberOfProcesses : Int) -> <#return type#> {
-//        <#function body#>
-//    }
+    func configureProcessesData(withNumberOfProceses numberOfProcesses : Int, andSizeOfMemory sizeOfMemory : Int, andSizeOfMemoryForOS sizeOS : Int, andRangeForSizeOfProcessInMemory rangeForSize : Range<Int>, andRangeForCreationDelay rangeDelay : Range<Int>, andRangeForProcessDuration rangeDuration : Range<Int>) {
+        
+        let operatingSystemProcess = MemoryNode(totalSize: sizeOS, isFreeSpace: false)
+        let initialFreeSpace = MemoryNode(totalSize: sizeOfMemory, isFreeSpace: true)
+        
+        
+        let sizesArray = generateRandomValues(withRange: rangeForSize, withQuantity: numberOfProcesses)
+        let creationArray = generateRandomValues(withRange: rangeDelay, withQuantity: numberOfProcesses)
+        let durationArray = generateRandomValues(withRange: rangeDuration, withQuantity: numberOfProcesses)
+        
+        var memoryArray = [MemoryNode]()
+        
+        for index in 0...numberOfProcesses {
+            memoryArray.append(MemoryNode(totalSize: sizesArray[index], isFreeSpace: false))
+        }
+        
+        
+        
+        memory = MemoryList(withHead: initialFreeSpace)
+        memory!.firstFitInsert(node: operatingSystemProcess)
+        
+    }
 
     
     func manageTime() {
