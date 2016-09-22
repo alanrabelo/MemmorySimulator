@@ -25,7 +25,6 @@ class MemoryList: NSObject {
     func firstFistInsert(node : MemoryNode) {
         
         var actualNodeInLoop = self.head
-        
         var previousFromActual : MemoryNode?
         
         //ATUALIZA O CONTADOR DE PROCESSOS DA MEMÓRIA, PARA ATRIBUIR UM VALOR ÚNICO A CADA PROCESSO CASO NÃO SEJA UM ESPAÇO LIVRE
@@ -70,7 +69,6 @@ class MemoryList: NSObject {
     func firstFistRemove(processID : Int) {
         
         var actualNodeInLoop = self.head
-        var previousFromActual : MemoryNode?
 
         while true {
             
@@ -85,6 +83,29 @@ class MemoryList: NSObject {
                     break
                 }
 
+            }
+            
+        }
+        
+    }
+    
+    func firstFistRemove(withProcess process: MemoryNode) {
+        
+        var actualNodeInLoop = self.head
+        
+        while true {
+            
+            if actualNodeInLoop == process {
+                actualNodeInLoop.isFreeSpace = true
+                actualNodeInLoop.processID = 0
+                break
+            } else {
+                if let nextNode = actualNodeInLoop.nextNode {
+                    actualNodeInLoop = nextNode
+                } else {
+                    break
+                }
+                
             }
             
         }
