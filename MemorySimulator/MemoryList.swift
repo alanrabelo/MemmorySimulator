@@ -22,7 +22,7 @@ class MemoryList: NSObject {
         actualNode = self.head
     }
     
-    func firstFistInsert(node : MemoryNode) {
+    func firstFitInsert(node : MemoryNode) {
         
         var actualNodeInLoop = self.head
         var previousFromActual : MemoryNode?
@@ -46,7 +46,7 @@ class MemoryList: NSObject {
                 
                 node.nextNode = actualNodeInLoop
                 actualNodeInLoop.totalSize -= node.totalSize
-                print("Adicionado com sucesso!")
+                print("Process: \(actualNodeInLoop.processID!) added in memory at \(NSDate())")
                 break
                 
             } else {
@@ -56,7 +56,7 @@ class MemoryList: NSObject {
                     actualNodeInLoop = nextNode
                     
                 } else {
-                    print("Faltou Espaço")
+                    print("Process is waitin in a row at \(NSDate())")
                     break
                 }
             }
@@ -74,6 +74,7 @@ class MemoryList: NSObject {
             
             if actualNodeInLoop.processID! == processID {
                 actualNodeInLoop.isFreeSpace = true
+                print("Process: \(actualNodeInLoop.processID!) removed at \(NSDate())")
                 actualNodeInLoop.processID = 0
                 break
             } else {
@@ -97,6 +98,7 @@ class MemoryList: NSObject {
             
             if actualNodeInLoop == process {
                 actualNodeInLoop.isFreeSpace = true
+                print("Process: \(actualNodeInLoop.processID!) removed at \(NSDate())")
                 actualNodeInLoop.processID = 0
                 break
             } else {
