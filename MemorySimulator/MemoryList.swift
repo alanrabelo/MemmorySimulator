@@ -50,6 +50,10 @@ class MemoryList: NSObject {
                 actualNodeInLoop.totalSize -= node.totalSize
                 actualNodeInLoop.allocDate = Date()
                 print("Process: \(actualNodeInLoop.processID!) added in memory at \(actualNodeInLoop.allocDate)")
+                
+                let vc = ViewController()
+                
+                //actualNodeInLoop.timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(actualNodeInLoop.duration!), target: vc, selector: #selector(uau), userInfo: nil, repeats: false)
                 break
                 
             } else {

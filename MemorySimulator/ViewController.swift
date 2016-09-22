@@ -39,6 +39,8 @@ class ViewController: UIViewController {
     
     // VARIÁVEIS PARA GERAR A ESTRUTURA DA MEMÓRIA
     var numberOfProcesses = 0
+    var processesArray = [MemoryNode]()
+    
     var strategy = strategyForMemoryManagement.firstFit
     var sizeOfMemory = 0
     var spaceForOS = 0
@@ -50,38 +52,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let headNode = MemoryNode(totalSize: 150, isFreeSpace: true)
-//        let _15Node = MemoryNode(totalSize: 15, isFreeSpace: false)
-//        let _25Node = MemoryNode(totalSize: 25, isFreeSpace: false)
-//        let _35Node = MemoryNode(totalSize: 35, isFreeSpace: false)
-//        let _35Node2 = MemoryNode(totalSize: 35, isFreeSpace: false)
         
-//        let memory = MemoryList(withHead: headNode)
-//        memory.firstFitInsert(node: _15Node)
-//        memory.firstFitInsert(node: _25Node)
-//
-//        memory.firstFistRemove(processID: 1)
-//
-//        memory.firstFitInsert(node: _35Node)
-//        memory.firstFitInsert(node: _35Node2)
-//
-//        memory.firstFistRemove(processID: 3)
-//        memory.firstFistRemove(processID: 4)
-        
-//        memory.mergeFreeSpaces()
-//        memory.printListSizes()
-        
-        let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(manageTime), userInfo: nil, repeats: true)
-        RunLoop.main.add(timer, forMode: .defaultRunLoopMode)
-        
-        print(generateRandomValues(withRange: 10..<31, withQuantity: 100).sorted())
-        
-        
+        configureProcessesData(withNumberOfProceses: 5, andSizeOfMemory: 130, andSizeOfMemoryForOS: 25, andRangeForSizeOfProcessInMemory: 35...55, andRangeForCreationDelay: 2...5, andRangeForProcessDuration: 1...4)
         
         
     }
     
-    func configureProcessesData(withNumberOfProceses numberOfProcesses : Int, andSizeOfMemory sizeOfMemory : Int, andSizeOfMemoryForOS sizeOS : Int, andRangeForSizeOfProcessInMemory rangeForSize : Range<Int>, andRangeForCreationDelay rangeDelay : Range<Int>, andRangeForProcessDuration rangeDuration : Range<Int>) {
+    func configureProcessesData(withNumberOfProceses numberOfProcesses : Int, andSizeOfMemory sizeOfMemory : Int, andSizeOfMemoryForOS sizeOS : Int, andRangeForSizeOfProcessInMemory rangeForSize : ClosedRange<Int>, andRangeForCreationDelay rangeDelay : ClosedRange<Int>, andRangeForProcessDuration rangeDuration : ClosedRange<Int>) {
         
         let operatingSystemProcess = MemoryNode(totalSize: sizeOS, isFreeSpace: false)
         let initialFreeSpace = MemoryNode(totalSize: sizeOfMemory, isFreeSpace: true)
@@ -92,9 +69,27 @@ class ViewController: UIViewController {
         let durationArray = generateRandomValues(withRange: rangeDuration, withQuantity: numberOfProcesses)
         
         var memoryArray = [MemoryNode]()
+        let actualDate = Date()
+        var countOfSecondsElapsed = 0
         
-        for index in 0...numberOfProcesses {
-            memoryArray.append(MemoryNode(totalSize: sizesArray[index], isFreeSpace: false))
+        for index in 0..<numberOfProcesses {
+            
+            let process = MemoryNode(totalSize: sizesArray[index], isFreeSpace: false)
+            countOfSecondsElapsed += creationArray[index]
+            process.creationDate = actualDate.addingTimeInterval(TimeInterval(countOfSecondsElapsed))
+            
+            process.duration = durationArray[index]
+            process.allocDate = process.creationDate?.addingTimeInterval(TimeInterval(durationArray[index]))
+            countOfSecondsElapsed += process.duration!
+            let timerToInstantiate = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
+            
+            process.timerToInstantiate = timerToInstantiate
+
+            processesArray.append(process)
+        }
+        
+        for process in memoryArray {
+            print("\(process.creationDate) - \(process.finishedDate)")
         }
         
         
@@ -105,8 +100,17 @@ class ViewController: UIViewController {
     }
 
     
+    func uau() {
+        if let firstProcess = processesArray.first {
+            print(firstProcess.allocDate)
+            memory!.firstFitInsert(node: firstProcess)
+            processesArray.removeFirst()
+        }
+    }
     func manageTime() {
-
+        
+        
+        
     }
     //MARK: TableView
     
@@ -162,7 +166,7 @@ class ViewController: UIViewController {
         
     }
     
-    func generateRandomValues(withRange range : Range<Int>, withQuantity quantity : Int) -> [Int] {
+    func generateRandomValues(withRange range : ClosedRange<Int>, withQuantity quantity : Int) -> [Int] {
         
         var arrayOfNumbers = [Int]()
         
