@@ -67,10 +67,22 @@ class ViewController: UIViewController {
         
         memory.mergeFreeSpaces()
         memory.printListSizes()
+        
+        let timer = Timer(timeInterval: 1.0, target: self, selector: #selector(manageTime), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: .defaultRunLoopMode)
+        
+        print(generateRandomValues(withRange: 10..<31, withQuantity: 100).sorted())
+        
+    }
+    
+//    func configureProcessesData(withNumberOfProceses numberOfProcesses : Int) -> <#return type#> {
+//        <#function body#>
+//    }
+
+    
+    func manageTime() {
 
     }
-
-        
     //MARK: TableView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,6 +135,24 @@ class ViewController: UIViewController {
         }
         
         
+    }
+    
+    func generateRandomValues(withRange range : Range<Int>, withQuantity quantity : Int) -> [Int] {
+        
+        var arrayOfNumbers = [Int]()
+        
+        let lowerBound = range.lowerBound as! Int
+        let upperBoundChanged = range.upperBound as! Int - lowerBound
+        
+        
+        for index in 0..<quantity {
+            
+            let randomNumber = (arc4random_uniform(UInt32(upperBoundChanged)))
+            
+            arrayOfNumbers.append(Int(randomNumber) + lowerBound)
+        }
+        
+        return arrayOfNumbers
     }
 
 }
