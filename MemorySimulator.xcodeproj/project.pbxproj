@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DFFD107B1D93FA1B004A09EE /* MemoryProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD107A1D93FA1B004A09EE /* MemoryProperties.swift */; };
+		DFFD107F1D94130C004A09EE /* SimulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFFD107E1D94130C004A09EE /* SimulationViewController.swift */; };
 		E710CBCF1D8B230A00F8F735 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E710CBCE1D8B230A00F8F735 /* AppDelegate.swift */; };
 		E710CBD11D8B230A00F8F735 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E710CBD01D8B230A00F8F735 /* ViewController.swift */; };
 		E710CBD41D8B230A00F8F735 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E710CBD21D8B230A00F8F735 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		DFFD107A1D93FA1B004A09EE /* MemoryProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryProperties.swift; sourceTree = "<group>"; };
+		DFFD107E1D94130C004A09EE /* SimulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimulationViewController.swift; path = ../SimulationViewController.swift; sourceTree = "<group>"; };
 		E710CBCB1D8B230A00F8F735 /* MemorySimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemorySimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E710CBCE1D8B230A00F8F735 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E710CBD01D8B230A00F8F735 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				E710CBDD1D8B230A00F8F735 /* Info.plist */,
 				E710CBD51D8B230A00F8F735 /* MemorySimulator.xcdatamodeld */,
 				DFFD107A1D93FA1B004A09EE /* MemoryProperties.swift */,
+				DFFD107E1D94130C004A09EE /* SimulationViewController.swift */,
 			);
 			path = MemorySimulator;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				E7A7FFB21D8C815B0047C357 /* MemoryList.swift in Sources */,
 				E710CBCF1D8B230A00F8F735 /* AppDelegate.swift in Sources */,
 				E710CC001D8B2E0C00F8F735 /* ChangeOptionsViewController.swift in Sources */,
+				DFFD107F1D94130C004A09EE /* SimulationViewController.swift in Sources */,
 				E7D5ACB71D8C80770052060D /* MemoryNode.swift in Sources */,
 				DFFD107B1D93FA1B004A09EE /* MemoryProperties.swift in Sources */,
 			);
