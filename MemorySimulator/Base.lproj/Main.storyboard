@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1AK-vI-80A">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Adjust Settings-->
+        <!--Configure seus processos-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemorySimulator" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,21 +28,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                             </textField>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GfS-h1-aUt">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="SVF-rC-1f2"/>
-                                </constraints>
-                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Configure seus Processos" id="Rjt-x0-n84">
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="Lgs-L9-OmE"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Estratégia de Alocação" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2y-Vv-dCj">
                                 <color key="backgroundColor" white="0.26949629474272929" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -83,7 +68,6 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="BBe-4d-BlK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1do-oV-o9E"/>
-                            <constraint firstItem="GfS-h1-aUt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Av0-r3-D3D"/>
                             <constraint firstItem="BBe-4d-BlK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Cp2-z1-sg4"/>
                             <constraint firstItem="poB-85-Aia" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="DO5-XX-g49"/>
                             <constraint firstItem="poB-85-Aia" firstAttribute="top" secondItem="BBe-4d-BlK" secondAttribute="bottom" constant="8" id="F9V-sO-fvI"/>
@@ -93,26 +77,75 @@
                             <constraint firstItem="n6B-cS-jKn" firstAttribute="top" secondItem="9MI-36-wgy" secondAttribute="bottom" constant="8" id="KaT-wJ-G7N"/>
                             <constraint firstItem="B0p-Qj-G0y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="L6c-5w-zYA"/>
                             <constraint firstItem="n6B-cS-jKn" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Mi9-dW-WyP"/>
-                            <constraint firstAttribute="trailing" secondItem="GfS-h1-aUt" secondAttribute="trailing" id="NOq-Ll-fnE"/>
                             <constraint firstItem="P2y-Vv-dCj" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="OqD-22-FfA"/>
                             <constraint firstItem="qac-77-Mhl" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="SNt-WY-C0P"/>
                             <constraint firstItem="B0p-Qj-G0y" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="TDM-Ms-GiC"/>
                             <constraint firstItem="P2y-Vv-dCj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="W6T-nM-sEo"/>
                             <constraint firstItem="BBe-4d-BlK" firstAttribute="top" secondItem="qac-77-Mhl" secondAttribute="bottom" constant="8" id="Xg1-6U-6RQ"/>
                             <constraint firstItem="qac-77-Mhl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cLu-l6-afL"/>
-                            <constraint firstItem="B0p-Qj-G0y" firstAttribute="top" secondItem="GfS-h1-aUt" secondAttribute="bottom" constant="20" id="gyt-1P-veR"/>
                             <constraint firstItem="n6B-cS-jKn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="jEn-nD-nLl"/>
                             <constraint firstItem="P2y-Vv-dCj" firstAttribute="top" secondItem="B0p-Qj-G0y" secondAttribute="bottom" constant="8" id="kPV-cU-DNh"/>
                             <constraint firstItem="9MI-36-wgy" firstAttribute="top" secondItem="poB-85-Aia" secondAttribute="bottom" constant="8" id="rCh-3x-D8L"/>
-                            <constraint firstItem="GfS-h1-aUt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="uNF-Nf-jWk"/>
+                            <constraint firstItem="B0p-Qj-G0y" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="21" id="tJU-L3-tGe"/>
                             <constraint firstItem="9MI-36-wgy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="vji-8G-CUI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Adjust Settings" id="6iy-UH-Xyc"/>
+                    <navigationItem key="navigationItem" title="Configure seus processos" id="6iy-UH-Xyc">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="sVL-DJ-r7Z">
+                            <connections>
+                                <segue destination="qQl-h8-JZH" kind="presentation" id="ykq-jM-9Me"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="intervalOfDurationOfAProcessTextField" destination="n6B-cS-jKn" id="k8A-4F-a6d"/>
+                        <outlet property="intervalOfProcessSizeInMemoryTextField" destination="poB-85-Aia" id="2C2-PN-JK5"/>
+                        <outlet property="intervalOfTimeOfInstatiationOfAProcessTextField" destination="9MI-36-wgy" id="8iO-0F-6dE"/>
+                        <outlet property="numberOfProcessesTextField" destination="B0p-Qj-G0y" id="RVr-jq-hbj"/>
+                        <outlet property="sizeOfMemoryTextField" destination="qac-77-Mhl" id="cSN-bz-ljv"/>
+                        <outlet property="spaceForOSTextField" destination="BBe-4d-BlK" id="NTI-SV-6z0"/>
+                        <outlet property="strategyTextField" destination="P2y-Vv-dCj" id="P20-7a-vxh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="45"/>
+            <point key="canvasLocation" x="1068" y="44.527736131934034"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="jm1-FQ-tw7">
+            <objects>
+                <viewController id="qQl-h8-JZH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kAO-AC-HY5"/>
+                        <viewControllerLayoutGuide type="bottom" id="IAD-cq-Wp2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CRH-md-BuG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.12129447609186172" green="0.12922456860542297" blue="0.14169979095458984" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mgk-Ey-MoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770" y="45"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VJJ-Br-wMa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1AK-vI-80A" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="g5N-cE-kLC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="enW-mV-VkU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M08-M9-wKh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="128.80000000000001" y="44.527736131934034"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
