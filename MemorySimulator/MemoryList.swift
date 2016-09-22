@@ -14,6 +14,8 @@ class MemoryList: NSObject {
     var actualNode : MemoryNode
     var countOfProcesses = 0
     
+    var rowOfProcessesWaiting = [MemoryNode]()
+    
     init(withHead head : MemoryNode) {
         self.head = head
         head.processID = 0
@@ -46,7 +48,8 @@ class MemoryList: NSObject {
                 
                 node.nextNode = actualNodeInLoop
                 actualNodeInLoop.totalSize -= node.totalSize
-                print("Process: \(actualNodeInLoop.processID!) added in memory at \(NSDate())")
+                actualNodeInLoop.allocDate = Date()
+                print("Process: \(actualNodeInLoop.processID!) added in memory at \(actualNodeInLoop.allocDate)")
                 break
                 
             } else {
@@ -56,7 +59,8 @@ class MemoryList: NSObject {
                     actualNodeInLoop = nextNode
                     
                 } else {
-                    print("Process is waitin in a row at \(NSDate())")
+                    print("Process is waiting in a row at \(node.creationDate)")
+                    rowOfProcessesWaiting.append(node)
                     break
                 }
             }
@@ -71,10 +75,9 @@ class MemoryList: NSObject {
         var actualNodeInLoop = self.head
 
         while true {
-            
             if actualNodeInLoop.processID! == processID {
                 actualNodeInLoop.isFreeSpace = true
-                print("Process: \(actualNodeInLoop.processID!) removed at \(NSDate())")
+                print("Process: \(actualNodeInLoop.processID!) removed at \(Date())")
                 actualNodeInLoop.processID = 0
                 break
             } else {
@@ -83,9 +86,7 @@ class MemoryList: NSObject {
                 } else {
                     break
                 }
-
             }
-            
         }
         
     }
@@ -170,6 +171,10 @@ class MemoryList: NSObject {
         }
         print("-------x-------x------")
 
+    }
+    
+    func verifyFreeSpaces() {
+        
     }
     
     

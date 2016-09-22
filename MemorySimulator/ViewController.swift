@@ -44,8 +44,6 @@ class ViewController: UIViewController {
         let _35Node = MemoryNode(totalSize: 35, isFreeSpace: false)
         let _35Node2 = MemoryNode(totalSize: 35, isFreeSpace: false)
         
-        
-        
         let memory = MemoryList(withHead: headNode)
         memory.firstFitInsert(node: _15Node)
         memory.firstFitInsert(node: _25Node)
