@@ -83,13 +83,10 @@ class SimulationViewController: UIViewController {
                     isSONode = false
                 }
                 
-                print("Tamanho do processo \(processHeight)")
-                print("Altura do processo \(processY)")
-                
                 if !(actualNode?.isFreeSpace)!{
-                    drawProcess (x: 0, y: processY, width: 105, height: processHeight)
+                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.red, sizeOfProcess: processSize!)
                 } else {
-                    drawFree (x: 0, y: processY, width: 105, height: processHeight)
+                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.green, sizeOfProcess: processSize!)
                 }
                 
                 actualNode = actualNode?.nextNode
@@ -108,21 +105,19 @@ class SimulationViewController: UIViewController {
         
     }
     
-    func drawProcess(x: Int, y: Int, width: Int, height: Int) {
+    func draw(x: Int, y: Int, width: Int, height: Int, color: UIColor, sizeOfProcess: Int) {
         
         let square = UIView(frame: CGRect(x: x, y: y , width: width, height: height))
-        
-        square.backgroundColor = UIColor.red
-        
+        square.backgroundColor = color
         self.memoryView.addSubview(square)
-    }
-    func drawFree(x: Int, y: Int, width: Int, height: Int) {
         
-        let square = UIView(frame: CGRect(x: x, y: y , width: width, height: height))
-        
-        square.backgroundColor = UIColor.green
-        
-        self.memoryView.addSubview(square)
+        let label = UILabel(frame: CGRect(x: x, y: y , width: width, height: height))
+        label.textColor = UIColor.white
+        label.text = String(sizeOfProcess)
+        label.font = UIFont(name: label.font.fontName, size: 10)
+        label.textAlignment = NSTextAlignment.center
+        label.center = square.center
+        self.memoryView.addSubview(label)
     }
     
 }

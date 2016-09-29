@@ -104,6 +104,7 @@ class MemoryList: NSObject {
             if actualNodeInLoop.processID! == processID {
                 actualNodeInLoop.isFreeSpace = true
                 print("Process: \(actualNodeInLoop.processID!) removed at \(Date())")
+                simulationViewController?.viewDidLoad()
                 actualNodeInLoop.processID = 0
                 break
             } else {
@@ -126,6 +127,7 @@ class MemoryList: NSObject {
             if actualNodeInLoop == process {
                 actualNodeInLoop.isFreeSpace = true
                 print("Process: \(actualNodeInLoop.processID!) removed at \(NSDate())")
+                simulationViewController?.viewDidLoad()
                 actualNodeInLoop.processID = 0
                 break
             } else {

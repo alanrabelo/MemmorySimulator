@@ -40,6 +40,7 @@ class ViewController: UIViewController {
     // VARIÁVEIS PARA GERAR A ESTRUTURA DA MEMÓRIA
     var numberOfProcesses = 0
     var processesArray = [MemoryNode]()
+    var processesArray2 = [MemoryNode]()
     
     var strategy = strategyForMemoryManagement.firstFit
     var sizeOfMemory = 0
@@ -80,11 +81,24 @@ class ViewController: UIViewController {
             process.duration = durationArray[index]
             
             countOfSecondsElapsed += process.duration!
+            print("1 - Duracao \(process.duration) CountSeconds \(countOfSecondsElapsed)")
+            
             let timerToInstantiate = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
             
             process.timerToInstantiate = timerToInstantiate
-
             processesArray.append(process)
+            
+            
+            
+            countOfSecondsElapsed += process.duration!
+            
+            let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed), target: self, selector: #selector(teste), userInfo: nil, repeats: false)
+            
+            print("2 - Duracao \(process.duration) CountSeconds \(countOfSecondsElapsed)")
+            
+            process.timerToFinish = timerToFinish
+            processesArray2.append(process)
+
         }
         
         for process in memoryArray {
@@ -104,6 +118,16 @@ class ViewController: UIViewController {
             processesArray.removeFirst()
         }
     }
+    
+    func teste() {
+        if let firstProcess = processesArray2.first {
+            
+            memory!.firstFistRemove(withProcess: firstProcess)
+            //processesArray.removeFirst()
+        }
+    }
+    
+    
     func manageTime() {
         
         
@@ -116,9 +140,7 @@ class ViewController: UIViewController {
         saveDataInMemoryProperties()
         
         configureProcessesData(withNumberOfProceses: MemoryProperties.numberOfProcesses, andSizeOfMemory: MemoryProperties.sizeOfMemory, andSizeOfMemoryForOS: MemoryProperties.spaceForOS, andRangeForSizeOfProcessInMemory: MemoryProperties.intervalOfProcessSizeInMemory, andRangeForCreationDelay: MemoryProperties.intervalOfTimeOfInstantiationOfAProcess, andRangeForProcessDuration: MemoryProperties.intervalOfDurationOfAProcess)
-        
-        
-        
+
     }
     
     func saveDataInMemoryProperties(){
