@@ -15,6 +15,8 @@ enum strategyForMemoryManagement {
     case nextFit
 }
 
+var memory : MemoryList?
+
 class ViewController: UIViewController {
     
     //TEXTFIELDS
@@ -34,8 +36,6 @@ class ViewController: UIViewController {
     
     var processes = [MemoryNode]()
     
-    var memory : MemoryList?
-    
     
     // VARIÁVEIS PARA GERAR A ESTRUTURA DA MEMÓRIA
     var numberOfProcesses = 0
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        configureProcessesData(withNumberOfProceses: 5, andSizeOfMemory: 130, andSizeOfMemoryForOS: 25, andRangeForSizeOfProcessInMemory: 35...55, andRangeForCreationDelay: 2...5, andRangeForProcessDuration: 1...4)
+        //configureProcessesData(withNumberOfProceses: 5, andSizeOfMemory: 130, andSizeOfMemoryForOS: 25, andRangeForSizeOfProcessInMemory: 35...55, andRangeForCreationDelay: 2...5, andRangeForProcessDuration: 1...4)
         
         
     }
@@ -91,8 +91,6 @@ class ViewController: UIViewController {
             print("\(process.creationDate) - \(process.finishedDate)")
         }
         
-        
-        
         memory = MemoryList(withHead: initialFreeSpace)
         memory!.firstFitInsert(node: operatingSystemProcess)
         
@@ -115,6 +113,15 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        saveDataInMemoryProperties()
+        
+        configureProcessesData(withNumberOfProceses: MemoryProperties.numberOfProcesses, andSizeOfMemory: MemoryProperties.sizeOfMemory, andSizeOfMemoryForOS: MemoryProperties.spaceForOS, andRangeForSizeOfProcessInMemory: MemoryProperties.intervalOfProcessSizeInMemory, andRangeForCreationDelay: MemoryProperties.intervalOfTimeOfInstantiationOfAProcess, andRangeForProcessDuration: MemoryProperties.intervalOfDurationOfAProcess)
+        
+        
+        
+    }
+    
+    func saveDataInMemoryProperties(){
         //Quando muda de tela, salva as propriedades na classe estática
         if let numberOfProcessesText = numberOfProcessesTextField.text, let numberOfProcessesValue = Int(numberOfProcessesText) {
             MemoryProperties.numberOfProcesses = numberOfProcessesValue
@@ -136,17 +143,17 @@ class ViewController: UIViewController {
             
             let splitedText = intervalOfProcessSizeInMemoryText.characters.split{$0 == ","}.map(String.init)
             
-            let interval = CountableClosedRange<Int>(uncheckedBounds: (lower: Int(splitedText[0])!, upper: Int(splitedText[1])!))
-                
+            let interval = ClosedRange<Int>(uncheckedBounds: (lower: Int(splitedText[0])!, upper: Int(splitedText[1])!))
+            
             MemoryProperties.intervalOfProcessSizeInMemory = interval
-        
+            
         }
         
         if let intervalOfTimeOfInstatiationOfAProcessText = intervalOfTimeOfInstatiationOfAProcessTextField.text {
             
             let splitedText = intervalOfTimeOfInstatiationOfAProcessText.characters.split{$0 == ","}.map(String.init)
             
-            let interval = CountableClosedRange<Int>(uncheckedBounds: (lower: Int(splitedText[0])!, upper: Int(splitedText[1])!))
+            let interval = ClosedRange<Int>(uncheckedBounds: (lower: Int(splitedText[0])!, upper: Int(splitedText[1])!))
             
             MemoryProperties.intervalOfTimeOfInstantiationOfAProcess = interval
             
@@ -156,13 +163,12 @@ class ViewController: UIViewController {
             
             let splitedText = intervalOfDurationOfAProcessText.characters.split{$0 == ","}.map(String.init)
             
-            let interval = CountableClosedRange<Int>(uncheckedBounds: (lower: Int(splitedText[0])!, upper: Int(splitedText[1])!))
+            let interval = ClosedRange<Int>(uncheckedBounds: (lower: Int(splitedText[0])!, upper: Int(splitedText[1])!))
             
             MemoryProperties.intervalOfDurationOfAProcess = interval
             
         }
-        
-        
+    
     }
     
     func generateRandomValues(withRange range : ClosedRange<Int>, withQuantity quantity : Int) -> [Int] {

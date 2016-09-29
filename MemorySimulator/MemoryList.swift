@@ -61,7 +61,9 @@ class MemoryList: NSObject {
                 
 
                 print("Process: \(actualNodeInLoop.processID!) added in memory at \(actualNodeInLoop.allocDate!) will finish at \(actualNodeInLoop.finishedDate)")
-
+                
+                
+                simulationViewController?.viewDidLoad()
 
                 //actualNodeInLoop.timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(actualNodeInLoop.duration!), target: vc, selector: #selector(uau), userInfo: nil, repeats: false)
                 break

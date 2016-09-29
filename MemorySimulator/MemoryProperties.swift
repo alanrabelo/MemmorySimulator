@@ -13,8 +13,8 @@ class MemoryProperties {
     static var strategy = "fistFit"
     static var sizeOfMemory = 0
     static var spaceForOS = 0
-    static var intervalOfProcessSizeInMemory = 0...1
-    static var intervalOfTimeOfInstantiationOfAProcess = 0...1
-    static var intervalOfDurationOfAProcess = 0...1
+    static var intervalOfProcessSizeInMemory : ClosedRange<Int> = 0...1
+    static var intervalOfTimeOfInstantiationOfAProcess : ClosedRange<Int> = 0...1
+    static var intervalOfDurationOfAProcess : ClosedRange<Int>  = 0...1
 
 }
