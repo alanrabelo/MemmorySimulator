@@ -49,10 +49,20 @@ class MemoryList: NSObject {
                 node.nextNode = actualNodeInLoop
                 actualNodeInLoop.totalSize -= node.totalSize
                 actualNodeInLoop.allocDate = Date()
-                print("Process: \(actualNodeInLoop.processID!) added in memory at \(actualNodeInLoop.allocDate)")
                 
-                let vc = ViewController()
                 
+                if let duration = actualNodeInLoop.duration {
+                    
+                    actualNodeInLoop.allocDate = Date()
+                    actualNodeInLoop.finishedDate = actualNodeInLoop.allocDate?.addingTimeInterval(TimeInterval(actualNodeInLoop.duration!))
+                    let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
+                    actualNodeInLoop.timerToFinish = timerToFinish
+                }
+                
+
+                print("Process: \(actualNodeInLoop.processID!) added in memory at \(actualNodeInLoop.allocDate!) will finish at \(actualNodeInLoop.finishedDate)")
+
+
                 //actualNodeInLoop.timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(actualNodeInLoop.duration!), target: vc, selector: #selector(uau), userInfo: nil, repeats: false)
                 break
                 
@@ -72,6 +82,16 @@ class MemoryList: NSObject {
             
         }
         
+    }
+    
+    func uau() {
+        
+        print("Finish")
+//        if let firstProcess = processesArray.first {
+//            print(firstProcess.allocDate)
+//            memory!.firstFitInsert(node: firstProcess)
+//            processesArray.removeFirst()
+//        }
     }
     
     func firstFistRemove(processID : Int) {

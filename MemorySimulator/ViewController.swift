@@ -77,9 +77,8 @@ class ViewController: UIViewController {
             let process = MemoryNode(totalSize: sizesArray[index], isFreeSpace: false)
             countOfSecondsElapsed += creationArray[index]
             process.creationDate = actualDate.addingTimeInterval(TimeInterval(countOfSecondsElapsed))
-            
             process.duration = durationArray[index]
-            process.allocDate = process.creationDate?.addingTimeInterval(TimeInterval(durationArray[index]))
+            
             countOfSecondsElapsed += process.duration!
             let timerToInstantiate = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
             
@@ -102,7 +101,7 @@ class ViewController: UIViewController {
     
     func uau() {
         if let firstProcess = processesArray.first {
-            print(firstProcess.allocDate)
+            
             memory!.firstFitInsert(node: firstProcess)
             processesArray.removeFirst()
         }
