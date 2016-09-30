@@ -53,8 +53,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //configureProcessesData(withNumberOfProceses: 5, andSizeOfMemory: 130, andSizeOfMemoryForOS: 25, andRangeForSizeOfProcessInMemory: 35...55, andRangeForCreationDelay: 2...5, andRangeForProcessDuration: 1...4)
+        configureProcessesData(withNumberOfProceses: 10, andSizeOfMemory: 130, andSizeOfMemoryForOS: 25, andRangeForSizeOfProcessInMemory: 35...55, andRangeForCreationDelay: 2...5, andRangeForProcessDuration: 1...4)
         
         
     }
@@ -86,7 +85,6 @@ class ViewController: UIViewController {
             countOfSecondsElapsed += process.duration!
             
             process.timerToInstantiate = timerToInstantiate
-            processesArray.append(process)
             
             
             //Testes para remoção do processo
@@ -95,7 +93,8 @@ class ViewController: UIViewController {
             let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed2), target: self, selector: #selector(teste), userInfo: nil, repeats: false)
             
             process.timerToFinish = timerToFinish
-            processesArray2.append(process)
+
+            processesArray.append(process)
         }
         
         for process in memoryArray {
@@ -103,7 +102,7 @@ class ViewController: UIViewController {
         }
         
         memory = MemoryList(withHead: initialFreeSpace)
-        memory!.firstFitInsert(node: operatingSystemProcess)
+        //memory!.firstFitInsert(node: operatingSystemProcess)
         
     }
 
@@ -111,7 +110,9 @@ class ViewController: UIViewController {
     func uau() {
         if let firstProcess = processesArray.first {
             
+            
             memory!.firstFitInsert(node: firstProcess)
+            
             processesArray.removeFirst()
 
         }

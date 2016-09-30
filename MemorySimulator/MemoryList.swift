@@ -15,7 +15,8 @@ class MemoryList: NSObject {
     var countOfProcesses = 0
     
     var rowOfProcessesWaiting = [MemoryNode]()
-    
+    var processesInMemory = [MemoryNode]()
+
     init(withHead head : MemoryNode) {
         self.head = head
         head.processID = 0
@@ -48,23 +49,24 @@ class MemoryList: NSObject {
                 
                 node.nextNode = actualNodeInLoop
                 actualNodeInLoop.totalSize -= node.totalSize
-                actualNodeInLoop.allocDate = Date()
+                node.allocDate = Date()
                 
                 
-                if let duration = actualNodeInLoop.duration {
-                    
-                    actualNodeInLoop.allocDate = Date()
-                    actualNodeInLoop.finishedDate = actualNodeInLoop.allocDate?.addingTimeInterval(TimeInterval(actualNodeInLoop.duration!))
-                    let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
-                    actualNodeInLoop.timerToFinish = timerToFinish
+                if node.duration != nil {
+                    node.allocDate = Date()
+                    node.finishedDate = node.allocDate?.addingTimeInterval(TimeInterval(node.duration!))
+                    let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(node.duration!), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
+                    node.timerToFinish = timerToFinish
                 }
                 
+                print("finish: \(node.finishedDate!)")
+  
+                
+                self.processesInMemory.append(node)
 
-                print("Process: \(actualNodeInLoop.processID!) added in memory at \(actualNodeInLoop.allocDate!) will finish at \(actualNodeInLoop.finishedDate)")
                 
                 simulationViewController?.viewDidLoad()
 
-                //actualNodeInLoop.timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(actualNodeInLoop.duration!), target: vc, selector: #selector(uau), userInfo: nil, repeats: false)
                 break
                 
             } else {
@@ -88,11 +90,10 @@ class MemoryList: NSObject {
     func uau() {
         
         print("Finish")
-//        if let firstProcess = processesArray.first {
-//            print(firstProcess.allocDate)
-//            memory!.firstFitInsert(node: firstProcess)
-//            processesArray.removeFirst()
-//        }
+        self.processesInMemory.sort(by: { $0.finishedDate! > $1.finishedDate!})
+        print(self.processesInMemory.first!.finishedDate!)
+        self.firstFistRemove(withProcess: self.processesInMemory.first!)
+    
     }
     
     func firstFistRemove(processID : Int) {
@@ -211,4 +212,61 @@ class MemoryList: NSObject {
     }
     
     
+}
+
+extension Date {
+    func isGreaterThanDate(dateToCompare: Date) -> Bool {
+        //Declare Variables
+        var isGreater = false
+        
+        //Compare Values
+        if self.compare(dateToCompare) == ComparisonResult.orderedDescending {
+            isGreater = true
+        }
+        
+        //Return Result
+        return isGreater
+    }
+    
+    func isLessThanDate(dateToCompare: Date) -> Bool {
+        //Declare Variables
+        var isLess = false
+        
+        //Compare Values
+        if self.compare(dateToCompare) == ComparisonResult.orderedAscending {
+            isLess = true
+        }
+        
+        //Return Result
+        return isLess
+    }
+    
+    func equalToDate(dateToCompare: Date) -> Bool {
+        //Declare Variables
+        var isEqualTo = false
+        
+        //Compare Values
+        if self.compare(dateToCompare) == ComparisonResult.orderedSame {
+            isEqualTo = true
+        }
+        
+        //Return Result
+        return isEqualTo
+    }
+    
+    func addDays(daysToAdd: Int) -> Date {
+        let secondsInDays: TimeInterval = Double(daysToAdd) * 60 * 60 * 24
+        let dateWithDaysAdded: Date = self.addingTimeInterval(secondsInDays)
+        
+        //Return Result
+        return dateWithDaysAdded
+    }
+    
+    func addHours(hoursToAdd: Int) -> Date {
+        let secondsInHours: TimeInterval = Double(hoursToAdd) * 60 * 60
+        let dateWithHoursAdded: Date = self.addingTimeInterval(secondsInHours)
+        
+        //Return Result
+        return dateWithHoursAdded
+    }
 }
