@@ -68,6 +68,10 @@ class SimulationViewController: UIViewController {
     
     func drawNodesInMemory(memory : MemoryList){
         
+        
+        print("")
+        var memoryUsed = 0
+        
         let countOfProcesses = memory.countOfProcesses
         var actualNode : MemoryNode?
         
@@ -90,6 +94,7 @@ class SimulationViewController: UIViewController {
                 
                 if !(actualNode?.isFreeSpace)!{
                     draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.red, actualProcess: actualNode!, boolIsFree:  false)
+                    memoryUsed += processSize!
 
                 } else {
                     draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.blue, actualProcess: actualNode!, boolIsFree:  true)
@@ -102,6 +107,8 @@ class SimulationViewController: UIViewController {
                 
             }
         }
+        percentOfUsedMemoryStr = String(memoryUsed)+"%"
+        print("Memory used \(memoryUsed)")
         
     }
     func calcY(memory : MemoryList, sizeOfProcess: Int) -> Int {
