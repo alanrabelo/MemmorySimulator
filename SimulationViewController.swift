@@ -51,7 +51,7 @@ class SimulationViewController: UIViewController {
         SimulationViewController.usedMemory = 0
         totalSizeOfMemory = MemoryProperties.sizeOfMemory
         
-        //logTextView.text = self.memory.printListSizes()
+        logTextView.text = self.memory.printListSizes()
         drawNodesInMemory(memory: self.memory!)
         
     }
