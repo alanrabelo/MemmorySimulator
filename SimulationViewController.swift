@@ -69,14 +69,12 @@ class SimulationViewController: UIViewController {
     func drawNodesInMemory(memory : MemoryList){
         
         
-        print("")
         var memoryUsed = 0
         
         let countOfProcesses = memory.countOfProcesses
         var actualNode : MemoryNode?
         
         actualNode = memory.head
-        print(" COUNT \(countOfProcesses)")
         while (countOfProcesses)>=0 {
             
             if actualNode != nil {
@@ -107,8 +105,11 @@ class SimulationViewController: UIViewController {
                 
             }
         }
-        percentOfUsedMemoryStr = String(memoryUsed)+"%"
-        print("Memory used \(memoryUsed)")
+        
+        percentOfUsedMemoryStr = String((Double(memoryUsed)/Double(MemoryProperties.sizeOfMemory))*100)+"%"
+        percentOfUsedMemory.text = String(format: "%.2f", percentOfUsedMemoryStr)
+        
+        
         
     }
     func calcY(memory : MemoryList, sizeOfProcess: Int) -> Int {

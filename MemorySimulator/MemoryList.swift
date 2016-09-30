@@ -67,9 +67,9 @@ class MemoryList: NSObject {
                     node.finishedDate = node.allocDate?.addingTimeInterval(TimeInterval(node.duration!))
                     let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(node.duration!), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
                     node.timerToFinish = timerToFinish
+                     print("Process: \(node.processID!) started at \(Date())")
                 }
                 
-                print("finish: \(node.finishedDate!)")
   
                 
                 self.processesInMemory.append(node)
@@ -93,7 +93,6 @@ class MemoryList: NSObject {
             
             
         }
-        print("used \(self.usedSize) - Free \(self.freeSize)")
         
         let percent = (Double(self.usedSize)/1.0)/Double(MemoryProperties.sizeOfMemory) * 100.0
         
@@ -105,8 +104,9 @@ class MemoryList: NSObject {
     
     func uau() {
         
-        print("Finish")
         processesInMemory.sort(by: { $0.finishedDate!.compare($1.finishedDate!) == ComparisonResult.orderedAscending })
+        
+        print("Finished process \(self.processesInMemory.first!)")
 
         self.firstFistRemove(withProcess: self.processesInMemory.first!)
         self.processesInMemory.removeFirst()
@@ -187,7 +187,6 @@ class MemoryList: NSObject {
     
     func mergeFreeSpaces() {
         
-        print(self.head.nextNode?.processID)
         var actualNode = self.head
         //simulationViewController?.viewDidLoad()
 
@@ -301,7 +300,6 @@ class MemoryList: NSObject {
             
         }
         
-        print("Valor Final \(finalValue)")
         //str += "-------x-------x------"
         return str
     }
