@@ -16,9 +16,12 @@ class MemoryList: NSObject {
     
     var rowOfProcessesWaiting = [MemoryNode]()
     var processesInMemory = [MemoryNode]()
-
+    var freeSize = 0
+    var usedSize = 0
     init(withHead head : MemoryNode) {
         self.head = head
+        self.freeSize = head.totalSize
+        
         head.processID = 0
         numberOfProcesses = 0
         countOfProcesses += 1
@@ -66,8 +69,8 @@ class MemoryList: NSObject {
   
                 
                 self.processesInMemory.append(node)
-
-                
+                self.freeSize -= node.totalSize
+                self.usedSize += node.totalSize
 
                 break
                 
@@ -88,6 +91,8 @@ class MemoryList: NSObject {
         }
         
         simulationViewController?.viewDidLoad()
+        
+        print("used \(self.usedSize) - Free \(self.freeSize)")
 
         
     }
@@ -114,6 +119,8 @@ class MemoryList: NSObject {
                 print("Process: \(actualNodeInLoop.processID!) removed at \(Date())")
 //                simulationViewController?.viewDidLoad()
                 actualNodeInLoop.processID = 0
+                self.freeSize += actualNodeInLoop.totalSize
+                self.usedSize -= actualNodeInLoop.totalSize
                 break
             } else {
                 if let nextNode = actualNodeInLoop.nextNode {
@@ -140,6 +147,8 @@ class MemoryList: NSObject {
                 actualNodeInLoop.isFreeSpace = true
                 print("Process: \(actualNodeInLoop.processID!) removed at \(NSDate())")
                 actualNodeInLoop.processID = 0
+                self.freeSize += actualNodeInLoop.totalSize
+                self.usedSize -= actualNodeInLoop.totalSize
                 break
             } else {
                 if let nextNode = actualNodeInLoop.nextNode {
