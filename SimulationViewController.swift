@@ -20,6 +20,8 @@ class SimulationViewController: UIViewController {
     var totalSizeOfMemory = 0
     static var usedMemory = 0
     
+    var memory : MemoryList!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         simulationViewController = self
@@ -49,8 +51,8 @@ class SimulationViewController: UIViewController {
         SimulationViewController.usedMemory = 0
         totalSizeOfMemory = MemoryProperties.sizeOfMemory
         
-        logTextView.text = memory?.printListSizes()
-        drawNodesInMemory(memory: memory!)
+        //logTextView.text = self.memory.printListSizes()
+        drawNodesInMemory(memory: self.memory!)
         
     }
     
@@ -83,9 +85,9 @@ class SimulationViewController: UIViewController {
                 }
                 
                 if !(actualNode?.isFreeSpace)!{
-                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.red, sizeOfProcess: processSize!)
+                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.red, actualProcess: actualNode!)
                 } else {
-                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.green, sizeOfProcess: processSize!)
+                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.green, actualProcess: actualNode!)
                 }
                 
                 actualNode = actualNode?.nextNode
@@ -104,7 +106,9 @@ class SimulationViewController: UIViewController {
         
     }
     
-    func draw(x: Int, y: Int, width: Int, height: Int, color: UIColor, sizeOfProcess: Int) {
+    func draw(x: Int, y: Int, width: Int, height: Int, color: UIColor, actualProcess: MemoryNode) {
+        
+        simulationViewController?.memory.mergeFreeSpaces()
         
         let square = UIView(frame: CGRect(x: x, y: y , width: width, height: height))
         square.backgroundColor = color
@@ -112,7 +116,7 @@ class SimulationViewController: UIViewController {
         
         let label = UILabel(frame: CGRect(x: x, y: y , width: width, height: height))
         label.textColor = UIColor.white
-        label.text = String(sizeOfProcess)
+        label.text = "\(actualProcess.processID) - \(actualProcess.totalSize)"
         label.font = UIFont(name: label.font.fontName, size: 10)
         label.textAlignment = NSTextAlignment.center
         label.center = square.center

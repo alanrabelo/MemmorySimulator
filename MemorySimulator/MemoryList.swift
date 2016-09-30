@@ -23,6 +23,7 @@ class MemoryList: NSObject {
         numberOfProcesses = 0
         countOfProcesses += 1
         actualNode = self.head
+        
     }
     
     func firstFitInsert(node : MemoryNode) {
@@ -35,6 +36,8 @@ class MemoryList: NSObject {
             node.processID = countOfProcesses
             countOfProcesses += 1
         }
+        
+        self.mergeFreeSpaces()
         
         while true {
             
@@ -65,7 +68,6 @@ class MemoryList: NSObject {
                 self.processesInMemory.append(node)
 
                 
-                simulationViewController?.viewDidLoad()
 
                 break
                 
@@ -85,28 +87,32 @@ class MemoryList: NSObject {
             
         }
         
+        simulationViewController?.viewDidLoad()
+
+        
     }
     
     func uau() {
         
         print("Finish")
-        self.processesInMemory.sort(by: { $0.finishedDate! > $1.finishedDate!})
-        print(self.processesInMemory.first!.finishedDate!)
+        processesInMemory.sort(by: { $0.finishedDate!.compare($1.finishedDate!) == ComparisonResult.orderedAscending })
+
         self.firstFistRemove(withProcess: self.processesInMemory.first!)
-    
+        self.processesInMemory.removeFirst()
     }
     
     func firstFistRemove(processID : Int) {
-        
+
+
         var actualNodeInLoop = self.head
+        simulationViewController?.viewDidLoad()
 
         while true {
-            simulationViewController?.viewDidLoad()
             
             if actualNodeInLoop.processID! == processID {
                 actualNodeInLoop.isFreeSpace = true
                 print("Process: \(actualNodeInLoop.processID!) removed at \(Date())")
-                simulationViewController?.viewDidLoad()
+//                simulationViewController?.viewDidLoad()
                 actualNodeInLoop.processID = 0
                 break
             } else {
@@ -117,19 +123,22 @@ class MemoryList: NSObject {
                 }
             }
         }
+        
+        self.mergeFreeSpaces()
+        simulationViewController?.viewDidLoad()
         
     }
     
     func firstFistRemove(withProcess process: MemoryNode) {
         
         var actualNodeInLoop = self.head
-        
+        simulationViewController?.viewDidLoad()
+
         while true {
             
             if actualNodeInLoop == process {
                 actualNodeInLoop.isFreeSpace = true
                 print("Process: \(actualNodeInLoop.processID!) removed at \(NSDate())")
-                simulationViewController?.viewDidLoad()
                 actualNodeInLoop.processID = 0
                 break
             } else {
@@ -143,20 +152,23 @@ class MemoryList: NSObject {
             
             
         }
+        self.mergeFreeSpaces()
+        simulationViewController?.viewDidLoad()
         
     }
     
     func mergeFreeSpaces() {
         
+        print(self.head.nextNode?.processID)
         var actualNode = self.head
-        
+        //simulationViewController?.viewDidLoad()
+
         while actualNode.nextNode != nil {
             
             while actualNode.nextNode!.isFreeSpace {
                 
                 if actualNode.isFreeSpace && actualNode.nextNode!.isFreeSpace {
                     
-                    simulationViewController?.viewDidLoad()
                     
                     if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
                         actualNode.nextNode = nextNodefromNextNode
@@ -166,7 +178,6 @@ class MemoryList: NSObject {
                         actualNode.nextNode = nil
                         return
                     }
-                    
                     
                 } else {
                     break

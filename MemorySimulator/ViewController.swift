@@ -15,11 +15,12 @@ enum strategyForMemoryManagement {
     case nextFit
 }
 
-var memory : MemoryList?
 
 class ViewController: UIViewController {
     
     //TEXTFIELDS
+    
+
     @IBOutlet weak var numberOfProcessesTextField: UITextField!
     @IBOutlet weak var strategyTextField: UITextField!
     @IBOutlet weak var sizeOfMemoryTextField: UITextField!
@@ -36,7 +37,9 @@ class ViewController: UIViewController {
     
     var processes = [MemoryNode]()
     
-    
+    //VARIÁVEL DA LISTA LIGADA DA MEMÓRIA
+    var memory : MemoryList?
+
     // VARIÁVEIS PARA GERAR A ESTRUTURA DA MEMÓRIA
     var numberOfProcesses = 0
     var processesArray = [MemoryNode]()
@@ -53,7 +56,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureProcessesData(withNumberOfProceses: 10, andSizeOfMemory: 130, andSizeOfMemoryForOS: 25, andRangeForSizeOfProcessInMemory: 35...55, andRangeForCreationDelay: 2...5, andRangeForProcessDuration: 1...4)
+        //configureProcessesData(withNumberOfProceses: 10, andSizeOfMemory: 130, andSizeOfMemoryForOS: 25, andRangeForSizeOfProcessInMemory: 35...55, andRangeForCreationDelay: 2...5, andRangeForProcessDuration: 1...4)
         
         
     }
@@ -73,16 +76,32 @@ class ViewController: UIViewController {
         var countOfSecondsElapsed = 0
         var countOfSecondsElapsed2 = 0
         
+        let soProcess = MemoryNode(totalSize: sizeOS, isFreeSpace: false)
+        soProcess.creationDate = actualDate
+        soProcess.duration = 0
+        
+        let timerToInstantiate = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(uau), userInfo: nil, repeats: false)
+        
+        soProcess.timerToInstantiate = timerToInstantiate
+        
+        
+        //Testes para remoção do processo
+        
+        
+
+        
         for index in 0..<numberOfProcesses {
             
             let process = MemoryNode(totalSize: sizesArray[index], isFreeSpace: false)
             countOfSecondsElapsed += creationArray[index]
             process.creationDate = actualDate.addingTimeInterval(TimeInterval(countOfSecondsElapsed))
+            
+            print("criação \(process.creationDate)")
             process.duration = durationArray[index]
             
             let timerToInstantiate = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
             
-            countOfSecondsElapsed += process.duration!
+            
             
             process.timerToInstantiate = timerToInstantiate
             
@@ -91,7 +110,7 @@ class ViewController: UIViewController {
             countOfSecondsElapsed2 = countOfSecondsElapsed + process.duration!
             
             let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed2), target: self, selector: #selector(teste), userInfo: nil, repeats: false)
-            
+           
             process.timerToFinish = timerToFinish
 
             processesArray.append(process)
@@ -125,6 +144,7 @@ class ViewController: UIViewController {
             processesArray2.removeFirst()
             
             memory?.mergeFreeSpaces()
+            simulationViewController?.viewDidLoad()
         }
     }
     
@@ -141,6 +161,9 @@ class ViewController: UIViewController {
         saveDataInMemoryProperties()
         
         configureProcessesData(withNumberOfProceses: MemoryProperties.numberOfProcesses, andSizeOfMemory: MemoryProperties.sizeOfMemory, andSizeOfMemoryForOS: MemoryProperties.spaceForOS, andRangeForSizeOfProcessInMemory: MemoryProperties.intervalOfProcessSizeInMemory, andRangeForCreationDelay: MemoryProperties.intervalOfTimeOfInstantiationOfAProcess, andRangeForProcessDuration: MemoryProperties.intervalOfDurationOfAProcess)
+        
+        let simulatorViewController = segue.destination as! SimulationViewController
+        simulatorViewController.memory = self.memory
 
     }
     
@@ -211,6 +234,8 @@ class ViewController: UIViewController {
         
         return arrayOfNumbers
     }
+    
+    
 
 }
 
