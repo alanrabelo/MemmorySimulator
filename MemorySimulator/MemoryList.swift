@@ -101,10 +101,6 @@ class MemoryList: NSObject {
         
         simulationViewController?.viewDidLoad()
         
-
-        
-        print("TOTAL SUM \(totalSizeSum)")
-        
     }
     
     func uau() {
@@ -161,6 +157,12 @@ class MemoryList: NSObject {
                 actualNodeInLoop.processID = 0
                 self.freeSize += actualNodeInLoop.totalSize
                 self.usedSize -= actualNodeInLoop.totalSize
+                
+                for node in self.rowOfProcessesWaiting {
+                    firstFitInsert(node: node)
+                }
+                
+                
                 break
             } else {
                 if let nextNode = actualNodeInLoop.nextNode {
@@ -187,8 +189,6 @@ class MemoryList: NSObject {
         var actualNode = self.head
         //simulationViewController?.viewDidLoad()
 
-        print("XXXX   BEFORE XXXXXXX")
-        print(self.printListSizes())
         while actualNode.nextNode != nil {
             var numberOfSequentialFreeSpaces = 0
             
@@ -218,32 +218,42 @@ class MemoryList: NSObject {
                 }
                 
                 
-                while actualNode.nextNode!.isFreeSpace {
-                    
-                    if actualNode.nextNode?.totalSize == 0 {
-                        actualNode.nextNode = actualNode.nextNode?.nextNode
-                        continue
-                    }
-                    
-                    if actualNode.nextNode!.isFreeSpace {
-                        numberOfSequentialFreeSpaces += 1
+                
+                if actualNode.nextNode != nil {
+                    while actualNode.nextNode!.isFreeSpace {
                         
-                        if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
-                            actualNode.totalSize += actualNode.nextNode!.totalSize
-                            actualNode.nextNode = nextNodefromNextNode
-                            actualNode = actualNode.nextNode!
+                        if actualNode.nextNode?.totalSize == 0 {
+                            actualNode.nextNode = actualNode.nextNode?.nextNode
                             continue
-                        } else {
-                            actualNode.totalSize += actualNode.nextNode!.totalSize
-                            actualNode.nextNode = nil
-                            break
                         }
                         
-                    } else {
-                        break
-                    
+                        if actualNode.nextNode!.isFreeSpace {
+                            numberOfSequentialFreeSpaces += 1
+                            if actualNode.nextNode == nil {
+                                break
+                            }
+                            if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
+                                actualNode.totalSize += actualNode.nextNode!.totalSize
+                                actualNode.nextNode = nextNodefromNextNode
+                                actualNode = actualNode.nextNode!
+                                continue
+                            } else {
+                                actualNode.totalSize += actualNode.nextNode!.totalSize
+                                actualNode.nextNode = nil
+                                break
+                            }
+                            
+                            
+                        } else {
+                            break
+                            
+                        }
+                        
+                        
                     }
+
                 }
+                
                 
                 if actualNode.nextNode != nil {
                     actualNode = actualNode.nextNode!
@@ -261,8 +271,6 @@ class MemoryList: NSObject {
             }
             
         }
-        print("XXXX   AFTER   XXXXXXX")
-        print(self.printListSizes())
 
     }
     
