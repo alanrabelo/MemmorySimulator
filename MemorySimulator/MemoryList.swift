@@ -126,6 +126,8 @@ class MemoryList: NSObject {
                 actualNodeInLoop.processID = 0
                 self.freeSize += actualNodeInLoop.totalSize
                 self.usedSize -= actualNodeInLoop.totalSize
+                simulationViewController?.viewDidLoad()
+
                 break
             } else {
                 if let nextNode = actualNodeInLoop.nextNode {
