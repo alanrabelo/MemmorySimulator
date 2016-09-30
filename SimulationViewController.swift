@@ -68,7 +68,7 @@ class SimulationViewController: UIViewController {
         var isSONode = true
         
         actualNode = memory.head
-        
+        print(" COUNT \(countOfProcesses)")
         while (countOfProcesses)>=0 {
             
             if actualNode != nil {
@@ -91,15 +91,13 @@ class SimulationViewController: UIViewController {
                 }
                 
                 actualNode = actualNode?.nextNode
-                countOfProcesses -= 1
+                if actualNode?.nextNode == nil {
+                    break
+                }
                 
-            } else{
-                countOfProcesses -= 1
             }
         }
-        
     }
-    
     func calcY(memory : MemoryList, sizeOfProcess: Int) -> Int {
         SimulationViewController.usedMemory = SimulationViewController.usedMemory + (500*sizeOfProcess)/totalSizeOfMemory
         return (500*sizeOfProcess)/totalSizeOfMemory

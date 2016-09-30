@@ -13,6 +13,7 @@ class MemoryList: NSObject {
     var numberOfProcesses : Int
     var actualNode : MemoryNode
     var countOfProcesses = 0
+    var countOfProcessID = 0
     
     var rowOfProcessesWaiting = [MemoryNode]()
     var processesInMemory = [MemoryNode]()
@@ -36,14 +37,16 @@ class MemoryList: NSObject {
         
         //ATUALIZA O CONTADOR DE PROCESSOS DA MEMÓRIA, PARA ATRIBUIR UM VALOR ÚNICO A CADA PROCESSO CASO NÃO SEJA UM ESPAÇO LIVRE
         if !node.isFreeSpace {
-            node.processID = countOfProcesses
-            countOfProcesses += 1
+            node.processID = countOfProcessID
+            countOfProcessID += 1
         }
-        
+        countOfProcesses += 1
+
         self.mergeFreeSpaces()
-        
+        var totalSizeSum = 0
         while true {
             
+            totalSizeSum += actualNodeInLoop.totalSize
             //Verifica se o nó selecionado é um espaço livre e se tem espaço para receber o nó
             if actualNodeInLoop.isFreeSpace == true && actualNodeInLoop.totalSize >= node.totalSize {
                 
@@ -56,6 +59,7 @@ class MemoryList: NSObject {
                 node.nextNode = actualNodeInLoop
                 actualNodeInLoop.totalSize -= node.totalSize
                 node.allocDate = Date()
+                
                 
                 
                 if node.duration != nil {
@@ -93,7 +97,7 @@ class MemoryList: NSObject {
         simulationViewController?.viewDidLoad()
         
         print("used \(self.usedSize) - Free \(self.freeSize)")
-
+        print("TOTAL SUM \(totalSizeSum)")
         
     }
     
@@ -107,7 +111,6 @@ class MemoryList: NSObject {
     }
     
     func firstFistRemove(processID : Int) {
-
 
         var actualNodeInLoop = self.head
         simulationViewController?.viewDidLoad()
@@ -173,11 +176,12 @@ class MemoryList: NSObject {
         //simulationViewController?.viewDidLoad()
 
         while actualNode.nextNode != nil {
+            var numberOfSequentialFreeSpaces = 0
             
             while actualNode.nextNode!.isFreeSpace {
                 
                 if actualNode.isFreeSpace && actualNode.nextNode!.isFreeSpace {
-                    
+                    numberOfSequentialFreeSpaces += 1
                     
                     if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
                         actualNode.nextNode = nextNodefromNextNode
@@ -193,6 +197,8 @@ class MemoryList: NSObject {
                 }
                 
             }
+            
+            countOfProcesses -= numberOfSequentialFreeSpaces
             
             if actualNode.nextNode != nil {
                 actualNode = actualNode.nextNode!
@@ -211,9 +217,9 @@ class MemoryList: NSObject {
         while true {
             
             if node.isFreeSpace {
-                str += "Free Space: \(node.totalSize)MB \n"
+                str += "F \(node.totalSize)MB \n"
             } else {
-                str += "Process: \(node.processID!) - \(node.totalSize)MB of used space \n"
+                str += "P \(node.processID!) - \(node.totalSize)MB\n"
 
             }
             

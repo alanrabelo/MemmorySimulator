@@ -76,14 +76,14 @@ class ViewController: UIViewController {
         var countOfSecondsElapsed = 0
         var countOfSecondsElapsed2 = 0
         
-        let soProcess = MemoryNode(totalSize: sizeOS, isFreeSpace: false)
-        soProcess.creationDate = actualDate
-        soProcess.duration = 0
-        
-        let timerToInstantiate = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(uau), userInfo: nil, repeats: false)
-        
-        soProcess.timerToInstantiate = timerToInstantiate
-        
+//        let soProcess = MemoryNode(totalSize: sizeOS, isFreeSpace: false)
+//        soProcess.creationDate = actualDate
+//        soProcess.duration = 0
+//        
+//        let timerToInstantiate = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(uau), userInfo: nil, repeats: false)
+//        
+//        soProcess.timerToInstantiate = timerToInstantiate
+//        processesArray.append(soProcess)
         
         //Testes para remoção do processo
         
