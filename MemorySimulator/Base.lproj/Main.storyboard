@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1AK-vI-80A">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1AK-vI-80A">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -123,58 +123,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a3T-js-PBC">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="4Oc-qs-c7g"/>
-                                    <constraint firstAttribute="height" constant="300" id="UFJ-ge-Dhm"/>
-                                </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lYe-0a-ig3">
-                                        <rect key="frame" x="0.0" y="28" width="150" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYe-0a-ig3" id="Vnf-zd-t8H">
-                                            <frame key="frameInset" width="150" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xjg-P8-Rb3">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ljq-pK-FLz">
-                                        <rect key="frame" x="0.0" y="28" width="150" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ljq-pK-FLz" id="GfP-LE-0PP">
-                                            <frame key="frameInset" width="150" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHb-4D-Ao7">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RC6-Pj-uGK">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDF-gk-eQ1">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="61" id="MJZ-uF-W5x"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.12129447609186172" green="0.12922456860542297" blue="0.14169979095458984" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="xjg-P8-Rb3" secondAttribute="bottom" constant="37" id="2Xe-YA-POb"/>
-                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="top" secondItem="a3T-js-PBC" secondAttribute="top" id="Hta-NQ-0N7"/>
-                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="bottom" secondItem="xjg-P8-Rb3" secondAttribute="bottom" id="LAT-TY-GRq"/>
-                            <constraint firstItem="xjg-P8-Rb3" firstAttribute="leading" secondItem="RHb-4D-Ao7" secondAttribute="trailing" constant="34" id="LU9-4e-dl0"/>
-                            <constraint firstItem="xjg-P8-Rb3" firstAttribute="top" secondItem="a3T-js-PBC" secondAttribute="bottom" constant="17" id="OJQ-gc-NLu"/>
-                            <constraint firstItem="a3T-js-PBC" firstAttribute="top" secondItem="kAO-AC-HY5" secondAttribute="bottom" constant="10" id="RTd-vi-UHk"/>
+                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="centerX" secondItem="eDF-gk-eQ1" secondAttribute="centerX" id="E3X-Cx-D9X"/>
+                            <constraint firstItem="eDF-gk-eQ1" firstAttribute="top" secondItem="RHb-4D-Ao7" secondAttribute="bottom" constant="8" symbolic="YES" id="H5A-cx-D0P"/>
+                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="bottom" secondItem="RC6-Pj-uGK" secondAttribute="bottom" id="HFL-Cb-5Ea"/>
+                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="top" secondItem="kAO-AC-HY5" secondAttribute="bottom" constant="10" id="Mag-2i-1H5"/>
+                            <constraint firstItem="RC6-Pj-uGK" firstAttribute="leading" secondItem="RHb-4D-Ao7" secondAttribute="trailing" constant="31" id="P12-4E-0q5"/>
+                            <constraint firstItem="eDF-gk-eQ1" firstAttribute="leading" secondItem="CRH-md-BuG" secondAttribute="leadingMargin" constant="49" id="RCt-J0-5tH"/>
+                            <constraint firstItem="RC6-Pj-uGK" firstAttribute="trailing" secondItem="CRH-md-BuG" secondAttribute="trailingMargin" id="bSZ-n3-wEs"/>
                             <constraint firstItem="RHb-4D-Ao7" firstAttribute="leading" secondItem="CRH-md-BuG" secondAttribute="leadingMargin" constant="-1" id="i9R-sr-CH9"/>
-                            <constraint firstItem="a3T-js-PBC" firstAttribute="trailing" secondItem="CRH-md-BuG" secondAttribute="trailingMargin" id="oGY-Sk-Pd2"/>
-                            <constraint firstItem="a3T-js-PBC" firstAttribute="leading" secondItem="xjg-P8-Rb3" secondAttribute="leading" id="tav-vt-1Ke"/>
-                            <constraint firstItem="a3T-js-PBC" firstAttribute="trailing" secondItem="xjg-P8-Rb3" secondAttribute="trailing" id="vYv-Ey-VVa"/>
+                            <constraint firstItem="RC6-Pj-uGK" firstAttribute="top" secondItem="kAO-AC-HY5" secondAttribute="bottom" constant="8" symbolic="YES" id="rTW-gh-6gN"/>
+                            <constraint firstItem="IAD-cq-Wp2" firstAttribute="top" secondItem="eDF-gk-eQ1" secondAttribute="bottom" constant="25" id="s5g-Xn-sZ6"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="finishedProcessesTableView" destination="xjg-P8-Rb3" id="w15-Vs-0iO"/>
+                        <outlet property="logTextView" destination="RC6-Pj-uGK" id="mNB-Cd-83f"/>
                         <outlet property="memoryView" destination="RHb-4D-Ao7" id="TVu-cV-WLG"/>
-                        <outlet property="waitingProcessesTableView" destination="a3T-js-PBC" id="JC4-8x-xzU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgk-Ey-MoT" userLabel="First Responder" sceneMemberID="firstResponder"/>

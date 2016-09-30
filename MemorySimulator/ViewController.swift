@@ -72,6 +72,7 @@ class ViewController: UIViewController {
         var memoryArray = [MemoryNode]()
         let actualDate = Date()
         var countOfSecondsElapsed = 0
+        var countOfSecondsElapsed2 = 0
         
         for index in 0..<numberOfProcesses {
             
@@ -80,25 +81,21 @@ class ViewController: UIViewController {
             process.creationDate = actualDate.addingTimeInterval(TimeInterval(countOfSecondsElapsed))
             process.duration = durationArray[index]
             
-            countOfSecondsElapsed += process.duration!
-            print("1 - Duracao \(process.duration) CountSeconds \(countOfSecondsElapsed)")
-            
             let timerToInstantiate = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed), target: self, selector: #selector(uau), userInfo: nil, repeats: false)
+            
+            countOfSecondsElapsed += process.duration!
             
             process.timerToInstantiate = timerToInstantiate
             processesArray.append(process)
             
             
+            //Testes para remoção do processo
+            countOfSecondsElapsed2 = countOfSecondsElapsed + process.duration!
             
-            countOfSecondsElapsed += process.duration!
-            
-            let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed), target: self, selector: #selector(teste), userInfo: nil, repeats: false)
-            
-            print("2 - Duracao \(process.duration) CountSeconds \(countOfSecondsElapsed)")
+            let timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(countOfSecondsElapsed2), target: self, selector: #selector(teste), userInfo: nil, repeats: false)
             
             process.timerToFinish = timerToFinish
             processesArray2.append(process)
-
         }
         
         for process in memoryArray {
@@ -116,6 +113,7 @@ class ViewController: UIViewController {
             
             memory!.firstFitInsert(node: firstProcess)
             processesArray.removeFirst()
+
         }
     }
     
@@ -123,7 +121,9 @@ class ViewController: UIViewController {
         if let firstProcess = processesArray2.first {
             
             memory!.firstFistRemove(withProcess: firstProcess)
-            //processesArray.removeFirst()
+            processesArray2.removeFirst()
+            
+            memory?.mergeFreeSpaces()
         }
     }
     

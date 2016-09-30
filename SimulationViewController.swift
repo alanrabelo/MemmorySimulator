@@ -12,10 +12,8 @@ var simulationViewController : SimulationViewController?
 
 class SimulationViewController: UIViewController {
     
-    @IBOutlet weak var waitingProcessesTableView: UITableView!
     
-    
-    @IBOutlet weak var finishedProcessesTableView: UITableView!
+    @IBOutlet weak var logTextView: UITextView!
     
     @IBOutlet weak var memoryView: UIView!
     
@@ -50,7 +48,8 @@ class SimulationViewController: UIViewController {
         
         SimulationViewController.usedMemory = 0
         totalSizeOfMemory = MemoryProperties.sizeOfMemory
-        memory?.printListSizes()
+        
+        logTextView.text = memory?.printListSizes()
         drawNodesInMemory(memory: memory!)
         
     }

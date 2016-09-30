@@ -62,7 +62,6 @@ class MemoryList: NSObject {
 
                 print("Process: \(actualNodeInLoop.processID!) added in memory at \(actualNodeInLoop.allocDate!) will finish at \(actualNodeInLoop.finishedDate)")
                 
-                
                 simulationViewController?.viewDidLoad()
 
                 //actualNodeInLoop.timerToFinish = Timer.scheduledTimer(timeInterval: TimeInterval(actualNodeInLoop.duration!), target: vc, selector: #selector(uau), userInfo: nil, repeats: false)
@@ -101,6 +100,8 @@ class MemoryList: NSObject {
         var actualNodeInLoop = self.head
 
         while true {
+            simulationViewController?.viewDidLoad()
+            
             if actualNodeInLoop.processID! == processID {
                 actualNodeInLoop.isFreeSpace = true
                 print("Process: \(actualNodeInLoop.processID!) removed at \(Date())")
@@ -139,6 +140,7 @@ class MemoryList: NSObject {
                 
             }
             
+            
         }
         
     }
@@ -152,6 +154,8 @@ class MemoryList: NSObject {
             while actualNode.nextNode!.isFreeSpace {
                 
                 if actualNode.isFreeSpace && actualNode.nextNode!.isFreeSpace {
+                    
+                    simulationViewController?.viewDidLoad()
                     
                     if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
                         actualNode.nextNode = nextNodefromNextNode
@@ -174,20 +178,21 @@ class MemoryList: NSObject {
             } else {
                 break
             }
-
         }
         
     }
     
-    func printListSizes() {
+    func printListSizes() -> String {
+        
+        var str = ""
         var node = self.head
-        print("-------x-------x------")
+        //str += "-------x-------x------"
         while true {
             
             if node.isFreeSpace {
-                print("Free Space: \(node.totalSize)MB")
+                str += "Free Space: \(node.totalSize)MB \n"
             } else {
-                print("Process: \(node.processID!) - \(node.totalSize)MB of used space")
+                str += "Process: \(node.processID!) - \(node.totalSize)MB of used space \n"
 
             }
             
@@ -197,8 +202,8 @@ class MemoryList: NSObject {
                 break
             }
         }
-        print("-------x-------x------")
-
+        //str += "-------x-------x------"
+        return str
     }
     
     func verifyFreeSpaces() {
