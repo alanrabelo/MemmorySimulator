@@ -132,9 +132,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDF-gk-eQ1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDF-gk-eQ1">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="61" id="MJZ-uF-W5x"/>
+                                    <constraint firstAttribute="width" constant="103" id="MJZ-uF-W5x"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -143,21 +143,22 @@
                         </subviews>
                         <color key="backgroundColor" red="0.12129447609186172" green="0.12922456860542297" blue="0.14169979095458984" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="centerX" secondItem="eDF-gk-eQ1" secondAttribute="centerX" id="E3X-Cx-D9X"/>
-                            <constraint firstItem="eDF-gk-eQ1" firstAttribute="top" secondItem="RHb-4D-Ao7" secondAttribute="bottom" constant="8" symbolic="YES" id="H5A-cx-D0P"/>
-                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="bottom" secondItem="RC6-Pj-uGK" secondAttribute="bottom" id="HFL-Cb-5Ea"/>
+                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="centerX" secondItem="eDF-gk-eQ1" secondAttribute="centerX" constant="-0.5" id="E3X-Cx-D9X"/>
+                            <constraint firstItem="eDF-gk-eQ1" firstAttribute="top" secondItem="RHb-4D-Ao7" secondAttribute="bottom" constant="30" id="H5A-cx-D0P"/>
+                            <constraint firstItem="RHb-4D-Ao7" firstAttribute="bottom" secondItem="RC6-Pj-uGK" secondAttribute="bottom" constant="-10" id="HFL-Cb-5Ea"/>
                             <constraint firstItem="RHb-4D-Ao7" firstAttribute="top" secondItem="kAO-AC-HY5" secondAttribute="bottom" constant="10" id="Mag-2i-1H5"/>
                             <constraint firstItem="RC6-Pj-uGK" firstAttribute="leading" secondItem="RHb-4D-Ao7" secondAttribute="trailing" constant="31" id="P12-4E-0q5"/>
-                            <constraint firstItem="eDF-gk-eQ1" firstAttribute="leading" secondItem="CRH-md-BuG" secondAttribute="leadingMargin" constant="49" id="RCt-J0-5tH"/>
+                            <constraint firstItem="eDF-gk-eQ1" firstAttribute="leading" secondItem="CRH-md-BuG" secondAttribute="leadingMargin" id="RCt-J0-5tH"/>
                             <constraint firstItem="RC6-Pj-uGK" firstAttribute="trailing" secondItem="CRH-md-BuG" secondAttribute="trailingMargin" id="bSZ-n3-wEs"/>
                             <constraint firstItem="RHb-4D-Ao7" firstAttribute="leading" secondItem="CRH-md-BuG" secondAttribute="leadingMargin" constant="-1" id="i9R-sr-CH9"/>
                             <constraint firstItem="RC6-Pj-uGK" firstAttribute="top" secondItem="kAO-AC-HY5" secondAttribute="bottom" constant="8" symbolic="YES" id="rTW-gh-6gN"/>
-                            <constraint firstItem="IAD-cq-Wp2" firstAttribute="top" secondItem="eDF-gk-eQ1" secondAttribute="bottom" constant="25" id="s5g-Xn-sZ6"/>
+                            <constraint firstItem="IAD-cq-Wp2" firstAttribute="top" secondItem="eDF-gk-eQ1" secondAttribute="bottom" constant="13" id="s5g-Xn-sZ6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="logTextView" destination="RC6-Pj-uGK" id="mNB-Cd-83f"/>
                         <outlet property="memoryView" destination="RHb-4D-Ao7" id="TVu-cV-WLG"/>
+                        <outlet property="percentOfUsedMemory" destination="eDF-gk-eQ1" id="QL8-LD-PDe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgk-Ey-MoT" userLabel="First Responder" sceneMemberID="firstResponder"/>

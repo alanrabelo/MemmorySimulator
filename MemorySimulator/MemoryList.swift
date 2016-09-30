@@ -93,6 +93,11 @@ class MemoryList: NSObject {
             
             
         }
+        print("used \(self.usedSize) - Free \(self.freeSize)")
+        
+        let percent = (Double(self.usedSize)/1.0)/Double(MemoryProperties.sizeOfMemory) * 100.0
+        
+        percentOfUsedMemoryStr = String (percent) + "%"
         
         simulationViewController?.viewDidLoad()
         
@@ -132,6 +137,9 @@ class MemoryList: NSObject {
         }
         
         self.mergeFreeSpaces()
+        let percent = (Double(self.usedSize)/1.0)/Double(MemoryProperties.sizeOfMemory) * 100.0
+        
+        percentOfUsedMemoryStr = String (percent) + "%"
         simulationViewController?.viewDidLoad()
         
     }
@@ -168,6 +176,9 @@ class MemoryList: NSObject {
             
         }
         self.mergeFreeSpaces()
+        let percent = (Double(self.usedSize)/1.0)/Double(MemoryProperties.sizeOfMemory) * 100.0
+        
+        percentOfUsedMemoryStr = String (percent) + "%"
         simulationViewController?.viewDidLoad()
         
     }

@@ -8,10 +8,13 @@
 
 import UIKit
 
+var percentOfUsedMemoryStr = String()
+
 var simulationViewController : SimulationViewController?
 
 class SimulationViewController: UIViewController {
     
+    @IBOutlet weak var percentOfUsedMemory: UILabel!
     
     @IBOutlet weak var logTextView: UITextView!
     
@@ -54,6 +57,8 @@ class SimulationViewController: UIViewController {
         logTextView.text = self.memory.printListSizes()
         drawNodesInMemory(memory: self.memory!)
         
+        percentOfUsedMemory.text = percentOfUsedMemoryStr
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,9 +89,10 @@ class SimulationViewController: UIViewController {
 //                }
                 
                 if !(actualNode?.isFreeSpace)!{
-                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.red, actualProcess: actualNode!)
+                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.red, actualProcess: actualNode!, boolIsFree:  false)
+
                 } else {
-                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.green, actualProcess: actualNode!)
+                    draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.blue, actualProcess: actualNode!, boolIsFree:  true)
                 }
                 
                 actualNode = actualNode?.nextNode
@@ -96,6 +102,7 @@ class SimulationViewController: UIViewController {
                 
             }
         }
+        
     }
     func calcY(memory : MemoryList, sizeOfProcess: Int) -> Int {
         SimulationViewController.usedMemory = SimulationViewController.usedMemory + (500*sizeOfProcess)/totalSizeOfMemory
@@ -103,7 +110,7 @@ class SimulationViewController: UIViewController {
         
     }
     
-    func draw(x: Int, y: Int, width: Int, height: Int, color: UIColor, actualProcess: MemoryNode) {
+    func draw(x: Int, y: Int, width: Int, height: Int, color: UIColor, actualProcess: MemoryNode, boolIsFree: Bool) {
         
         simulationViewController?.memory.mergeFreeSpaces()
         
@@ -113,7 +120,9 @@ class SimulationViewController: UIViewController {
         
         let label = UILabel(frame: CGRect(x: x, y: y , width: width, height: height))
         label.textColor = UIColor.white
-        label.text = "\(actualProcess.processID) - \(actualProcess.totalSize)"
+        if !boolIsFree {
+            label.text = "ID: \(actualProcess.processID!) - \(actualProcess.totalSize) MB"
+        }
         label.font = UIFont(name: label.font.fontName, size: 10)
         label.textAlignment = NSTextAlignment.center
         label.center = square.center
