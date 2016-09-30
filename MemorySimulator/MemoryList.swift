@@ -175,38 +175,83 @@ class MemoryList: NSObject {
         var actualNode = self.head
         //simulationViewController?.viewDidLoad()
 
+        print("XXXX   BEFORE XXXXXXX")
+        print(self.printListSizes())
         while actualNode.nextNode != nil {
             var numberOfSequentialFreeSpaces = 0
             
-            while actualNode.nextNode!.isFreeSpace {
+            if (actualNode.isFreeSpace) {
                 
-                if actualNode.isFreeSpace && actualNode.nextNode!.isFreeSpace {
-                    numberOfSequentialFreeSpaces += 1
+                //VERIFICA'ÃO DE TRES ESPAÇOS
+                
+                if actualNode.nextNode != nil && actualNode.nextNode?.nextNode != nil {
+                    if actualNode.isFreeSpace && actualNode.nextNode!.isFreeSpace && actualNode.nextNode!.nextNode!.isFreeSpace {
+                        actualNode.totalSize += actualNode.nextNode!.totalSize + actualNode.nextNode!.nextNode!.totalSize
+                        
+                        if let ultimo = actualNode.nextNode!.nextNode!.nextNode {
+                            actualNode.nextNode = ultimo
+                        } else {
+                            actualNode.nextNode = nil
+                        }
+                    }
+                }
+                
+                
+                
+                if let nextNode = actualNode.nextNode {
+                    if !nextNode.isFreeSpace {
+                        actualNode = actualNode.nextNode!
+                        continue
+                    }
+                }
+                
+                
+                while actualNode.nextNode!.isFreeSpace {
                     
-                    if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
-                        actualNode.nextNode = nextNodefromNextNode
-                        actualNode.totalSize += actualNode.nextNode!.totalSize
-                    } else {
-                        actualNode.totalSize += actualNode.nextNode!.totalSize
-                        actualNode.nextNode = nil
-                        return
+                    if actualNode.nextNode?.totalSize == 0 {
+                        actualNode.nextNode = actualNode.nextNode?.nextNode
+                        continue
                     }
                     
+                    if actualNode.nextNode!.isFreeSpace {
+                        numberOfSequentialFreeSpaces += 1
+                        
+                        if let nextNodefromNextNode = actualNode.nextNode!.nextNode {
+                            actualNode.totalSize += actualNode.nextNode!.totalSize
+                            actualNode.nextNode = nextNodefromNextNode
+                            actualNode = actualNode.nextNode!
+                            continue
+                        } else {
+                            actualNode.totalSize += actualNode.nextNode!.totalSize
+                            actualNode.nextNode = nil
+                            break
+                        }
+                        
+                    } else {
+                        break
+                    
+                    }
+                }
+                
+                if actualNode.nextNode != nil {
+                    actualNode = actualNode.nextNode!
+                    continue
+
                 } else {
                     break
                 }
                 
-            }
-            
-            countOfProcesses -= numberOfSequentialFreeSpaces
-            
-            if actualNode.nextNode != nil {
-                actualNode = actualNode.nextNode!
+                countOfProcesses -= numberOfSequentialFreeSpaces
+
             } else {
-                break
+                actualNode = actualNode.nextNode!
+                continue
             }
+            
         }
-        
+        print("XXXX   AFTER   XXXXXXX")
+        print(self.printListSizes())
+
     }
     
     func printListSizes() -> String {
@@ -214,6 +259,8 @@ class MemoryList: NSObject {
         var str = ""
         var node = self.head
         //str += "-------x-------x------"
+        
+        var finalValue = 0
         while true {
             
             if node.isFreeSpace {
@@ -223,12 +270,16 @@ class MemoryList: NSObject {
 
             }
             
+            finalValue += node.totalSize
             if let nextNode = node.nextNode {
                 node = nextNode
             } else {
                 break
             }
+            
         }
+        
+        print("Valor Final \(finalValue)")
         //str += "-------x-------x------"
         return str
     }

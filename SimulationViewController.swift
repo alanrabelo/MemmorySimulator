@@ -63,9 +63,8 @@ class SimulationViewController: UIViewController {
     
     func drawNodesInMemory(memory : MemoryList){
         
-        var countOfProcesses = memory.countOfProcesses
+        let countOfProcesses = memory.countOfProcesses
         var actualNode : MemoryNode?
-        var isSONode = true
         
         actualNode = memory.head
         print(" COUNT \(countOfProcesses)")
@@ -77,12 +76,12 @@ class SimulationViewController: UIViewController {
                 
                 let processHeight = calcY(memory: memory, sizeOfProcess: processSize!)
                 
-                var processY = 500 - SimulationViewController.usedMemory
+                let processY = 500 - SimulationViewController.usedMemory
                 
-                if isSONode{
-                    processY = 500 - processHeight
-                    isSONode = false
-                }
+//                if isSONode{
+//                    processY = 500 - processHeight
+//                    isSONode = false
+//                }
                 
                 if !(actualNode?.isFreeSpace)!{
                     draw (x: 0, y: processY, width: 105, height: processHeight, color: UIColor.red, actualProcess: actualNode!)
